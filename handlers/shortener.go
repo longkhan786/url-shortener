@@ -45,16 +45,23 @@ func ShortenURL(c *gin.Context) {
 	})
 }
 
-// RedirectURL handles the redirection from the short URL to the original URL.
 func RedirectURL(c *gin.Context) {
 	database := db.DB
 
 	shortCode := c.Param("shortURL")
 
 	var url models.URL
+
 	if err := database.Where("short_code = ?", shortCode).First(&url).Error; err != nil {
 		c.JSON(404, gin.H{
 			"error": "Short URL not found.",
+		})
+		return
+	}
+
+	if err := database.Model(&url).UpdateColumn("click_count", url.ClickCount+1).Error; err != nil {
+		c.JSON(500, gin.H{
+			"error": "Failed to update click count. Please try again later.",
 		})
 		return
 	}
