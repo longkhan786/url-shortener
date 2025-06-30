@@ -1,20 +1,17 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/longkhan786/url-shortener/db"
+	"github.com/longkhan786/url-shortener/handlers"
 )
 
 func main() {
 
 	router := gin.Default()
+	db.InitDB()
 
-	router.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "URL Shortener API is running!",
-		})
-	})
+	handlers.Route(router)
 
 	// Start server on port 8080
 	router.Run(":8080")
