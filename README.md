@@ -32,8 +32,6 @@ A simple URL shortening service built with:
 
 ## 🛠 Installation
 
-1. **Clone the repo**
-
 ```bash
 git clone https://github.com/longkhan786/url-shortener.git
 
