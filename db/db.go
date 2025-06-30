@@ -14,7 +14,7 @@ func InitDB() {
 	var err error
 	DB, err = gorm.Open(sqlite.Open("shortener.db"), &gorm.Config{})
 	if err != nil {
-		log.Fatal("failed to connect database")
+		log.Fatalf("failed to connect database: %v", err)
 	}
 
 	err = DB.AutoMigrate(&models.URL{})

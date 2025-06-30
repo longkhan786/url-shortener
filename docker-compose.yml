@@ -1,0 +1,9 @@
+services:
+  shortener:
+    build: .
+    container_name: go-url-shortener
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./shortener.db:/app/shortener.db
+    restart: unless-stopped

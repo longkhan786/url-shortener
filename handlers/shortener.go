@@ -35,7 +35,7 @@ func ShortenURL(c *gin.Context) {
 		return
 	}
 
-	shortenedURL := "https://" + c.Request.Host + "/" + shortCode
+	shortenedURL := "http://" + c.Request.Host + "/" + shortCode
 
 	c.JSON(200, gin.H{
 		"shortenedUrl": shortenedURL,
